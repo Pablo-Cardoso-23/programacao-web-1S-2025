@@ -28,7 +28,7 @@ function transporMatriz(A) {
     }
 
     console.log("MATRIZ TRANSPOSTA:")
-    
+     
     let transposta = [];
 
     for (let j = 0; j < A[0].length; j++) {
