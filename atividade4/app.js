@@ -7,7 +7,14 @@ const app = express();
 app.get('/', (req, res) => {
     
     res.send(`<h1>P4 STORE</h1>
-        <h2>Bem-Vindo(a) ao sistema de estoque!</h2>`);
+        <h2>Bem-Vindo(a) ao sistema de estoque!</h2>
+        <p>Comandos Disponíveis:</p>
+        <ul>
+            <li>Adicionar Produto: /adicionar/:id/:nome/:qtd</li>
+            <li>Listar Produtos: /listar</li>
+            <li>Remover Produto: /remover/:id</li>
+            <li>Editar Produto: /editar/:id/:qtd</li>
+            </ul>`);
     
 });
 
