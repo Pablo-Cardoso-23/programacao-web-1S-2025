@@ -1,5 +1,15 @@
 const estoque = [];
 
+function is_numeric(number) {
+
+    if(isNaN(number) || number == null ) {
+
+        return false;
+    }
+
+    return true;
+}
+
 function adicionarProdutos(id, nome, quantidade) {
 
     const produto = {
@@ -9,8 +19,51 @@ function adicionarProdutos(id, nome, quantidade) {
         quantidade: quantidade
     };
 
-    estoque.push(produto);
+    let validado = true;
 
+    if(!is_numeric(produto.id) || produto.id <= 0) {
+
+        validado = false;
+    }
+
+    if(isIdCadastrado(produto.id)) {
+
+        validado = false;
+    }
+
+    if(!is_numeric(produto.quantidade)|| produto.quantidade < 0) {
+
+        validado = false;
+    }
+
+
+    if(validado) {
+    
+        estoque.push(produto);
+
+        return `Produto ${produto.nome} adicionado com sucesso!`;
+    }
+    
+    else {
+
+        return `Produto não adicionado!`;
+    }
+    
+
+}
+
+function isIdCadastrado(id) {
+
+    for(let indice in estoque) {
+        let item_cadastrado = estoque[indice];
+
+        if(item_cadastrado.id == id) {
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function listarProdutos() {
@@ -29,13 +82,21 @@ function listarProdutos() {
 
 function removerProdutos(id) {
 
-    for (let i = 0; i < estoque.length; i++) {
+    if(!is_numeric(id) || id <= 0) {
 
-        if (estoque[i].id == id) {
+        return `ID INVÁLIDO!`;
+    }
 
-            estoque.splice(i, 1);
-            return `Produto com ID ${id} removido com sucesso!`;
+    else {
 
+        for (let i = 0; i < estoque.length; i++) {
+
+            if (estoque[i].id == id) {
+    
+                estoque.splice(i, 1);
+                return `Produto com ID ${id} removido com sucesso!`;
+    
+            }
         }
     }
 
@@ -43,6 +104,16 @@ function removerProdutos(id) {
 }
 
 function editarProdutos(id, quantidade) {
+
+    if(!is_numeric(id) || id <= 0) {
+
+        return `ID INVÁLIDO!`;
+    }
+
+    if(!is_numeric(quantidade) || quantidade < 0) {
+
+        return `QUANTIDADE INVÁLIDA!`;
+    }
 
     for (let i = 0; i < estoque.length; i++) {
 

@@ -20,9 +20,12 @@ app.get('/', (req, res) => {
 
 app.get('/adicionar/:id/:nome/:qtd', (req, res) => {
 
-    const {id, nome, qtd} = req.params;
-    estoque.adicionarProdutos(id, nome, qtd);
-    res.send('Produto adicionado ao estoque com sucesso!');
+    const id = Number(req.params.id);
+    const nome = req.params.nome;
+    const qtd = Number(req.params.qtd);
+    
+    const item = estoque.adicionarProdutos(id, nome, qtd);
+    res.send(`Situação da Operação: ${item}`);
     
 });
 
@@ -34,17 +37,18 @@ app.get('/listar', (req, res) => {
 
 app.get('/remover/:id', (req, res) => {
 
-    const {id} = req.params;
+    const id = Number(req.params.id);
     const item = estoque.removerProdutos(id);
-    res.send(`Item Removido: ${item}`);
+    res.send(`Situação da Operação: ${item}`);
 
 });
 
 app.get('/editar/:id/:qtd', (req, res) => {
 
-    const {id, qtd} = req.params;
+    const id = Number(req.params.id);
+    const qtd = Number(req.params.qtd);
     const item_editar = estoque.editarProdutos(id, qtd);
-    res.send(`Item Editado: ${item_editar}`);
+    res.send(`Situação da Operação: ${item_editar}`);
 });
 
 app.listen(PORT, () => {
